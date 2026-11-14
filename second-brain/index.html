@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MOCA Agentic OS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800&family=Red+Hat+Text:wght@400;500;600;700&family=Red+Hat+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css?v=22">
+<link rel="stylesheet" href="css/inicio.css?v=14">
+<script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<script>document.write('<script src="js/data.js?t=' + Date.now() + '"><\/script>');</script>
+<script src="js/shared.js?v=25"></script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body class="homepage os2">
+<div class="topline"></div>
+<main class="ho">
+  <aside class="ho-c">
+    <section class="pn pn-apps" id="p-apps"></section>
+    <section class="pn pn-cal grow" id="p-cal"></section>
+  </aside>
+
+  <section class="hc" id="hc">
+    <div class="hc-ttl">
+      <h1><span id="logo"></span><b>MOCA</b><em>Agentic OS</em></h1>
+      <div class="hc-who" id="who"></div>
+      <div class="hc-tools" id="tools"></div>
+    </div>
+    <div id="osorb"></div>
+    <div class="oring" id="ring"></div>
+    <div class="sbh" id="sbh">Clic para abrir Second Brain</div>
+  </section>
+
+  <aside class="ho-c r">
+    <section class="pn pn-mail grow" id="p-mail"></section>
+    <section class="pn pn-rut" id="p-rut"></section>
+    <section class="pn pn-sk" id="p-sk"></section>
+  </aside>
+</main>
+<div class="tip" id="tip"></div>
+<script type="module" src="js/os.js?v=35"></script>
+</body>
+</html>

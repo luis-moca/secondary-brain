@@ -1,0 +1,18 @@
+.DS_Store
+__pycache__/
+*.pyc
+
+# Tus archivos: nunca se suben
+Knowledge/*
+!Knowledge/.gitkeep
+
+# Lo que el panel arma en tu compu
+second-brain/vault/
+second-brain/memoria/
+second-brain/thumbs/
+second-brain/runs/
+second-brain/.cache/
+second-brain/videos/
+second-brain/externas/
+second-brain/js/data.js
+second-brain/PENDIENTES.md

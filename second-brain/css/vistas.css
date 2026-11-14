@@ -1,0 +1,238 @@
+/* Vistas de Second Brain: línea de tiempo, rutinas, apps y skills. Igual en las dos copias del panel.
+   Letra: --brand para títulos y cifras, --ui para lo demás, --code solo para horas en chip. Nada menor a 12 px. */
+
+/* ---------- barra de controles ---------- */
+.vs-bar{display:flex;align-items:center;justify-content:space-between;gap:14px 18px;flex-wrap:wrap;margin-bottom:16px;min-height:36px}
+.vs-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-left:auto}
+.vs-seg button{height:26px;padding:0 11px;font-size:12.5px}
+.vs-seg button .c{font-family:var(--brand);font-weight:500;color:var(--dim);margin-left:4px}
+.vs-seg button.on .c{color:var(--accent2)}
+.vs-k{font-family:var(--brand);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cfc9c0}
+.vs-sum{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;font-size:13px;color:var(--dim)}
+.vs-sum>i{font-style:normal;color:var(--mute)}
+.vs-sum .vs-v b{font-family:var(--brand);font-weight:600;font-size:14px;color:#fff;letter-spacing:.01em}
+.vs-sum .vs-v[data-tip]{cursor:help}
+.vs-sort{display:flex;align-items:center;gap:10px;margin-left:auto}
+.vs-foot{margin-top:18px;max-width:900px;color:var(--dim);font-size:12.5px;line-height:1.55}
+.vs-none{color:var(--dim);font-size:13px;padding:22px 4px}
+.vs-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;color:var(--dim);padding:70px 20px}
+.vs-empty svg{width:34px;height:34px;stroke:var(--mute);fill:none;stroke-width:1.5}
+.vs-empty b{color:#fff;font-family:var(--brand);font-weight:500;font-size:17px}
+.vs-empty span{max-width:460px;line-height:1.55}
+
+/* ---------- entrada: corta y suave, solo al entrar a la vista ---------- */
+@keyframes vsIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes vsPop{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
+@keyframes vsFade{from{opacity:0}to{opacity:1}}
+.vs-anim .vs-in{animation:vsIn .42s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*18ms)}
+.vs-anim .vs-pop{animation:vsPop .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*14ms);transform-box:fill-box;transform-origin:center}
+.vs-anim .vs-fade{animation:vsFade .45s ease both}
+
+/* ---------- línea de tiempo ---------- */
+.vs-tl{position:relative;border:1px solid var(--line);border-radius:12px;background:rgba(10,10,12,.6);padding:16px;overflow:hidden}
+.vs-tl>svg{display:block;overflow:visible}
+.vs-tl svg text{font-family:var(--ui);font-size:12px;fill:var(--dim)}
+.vs-tl svg .mo{font-family:var(--brand);font-weight:600;letter-spacing:.12em;text-transform:uppercase;fill:#d8d3cb}
+.vs-tl svg .dn.hoy{fill:var(--accent);font-weight:600}
+.vs-tl svg .more{fill:#bdb8af;font-family:var(--brand);font-weight:500}
+.vs-tl svg .today{fill:rgba(255,106,43,.06)}
+.vs-tl svg .nodata{fill:var(--dim);font-size:12px}
+.vs-tl svg .mline{stroke:rgba(255,255,255,.09)}
+.vs-tl svg .oline{stroke:rgba(255,255,255,.12)}
+.vs-tl svg .lline{stroke:rgba(255,255,255,.05)}
+.vs-tl svg circle.old{opacity:.72}
+.vs-tl svg .chip circle{fill:currentColor;fill-opacity:.12;stroke:currentColor;stroke-opacity:.5;stroke-width:1}
+.vs-tl svg .chip.ochip circle{fill-opacity:.08;stroke-opacity:.38}
+.vs-tl svg .chip.off{opacity:.38}
+svg.vs-ic{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+/* nombre de carril: botón con su cifra; clic lo oculta o lo muestra. Nombres largos en dos renglones, sin cortar. */
+.vs-lab{position:absolute;left:10px;display:flex;align-items:center;gap:8px;padding:0 6px;border-radius:7px;font-size:12.5px;color:#d5d0c8;text-align:left;cursor:pointer;transition:background .15s}
+.vs-lab:hover{background:rgba(255,255,255,.035)}
+.vs-lw{display:flex;align-items:flex-start;gap:8px;min-width:0}
+.vs-lab .dot{flex:none;margin-top:6px}
+.vs-lt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.vs-lab .t{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3;overflow-wrap:anywhere}
+.vs-lab .n{font-size:12px;line-height:1.3;color:var(--dim)}
+.vs-lab .n b{font-family:var(--brand);font-weight:600;color:#e9e4dc}
+.vs-lab.g .t{font-family:var(--brand);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.vs-lab:hover .t{color:#fff}
+.vs-lab.off{opacity:.45}
+.vs-lab.off:hover{opacity:.8}
+.vs-tlday{position:absolute;display:none;pointer-events:none;border-radius:4px;background:rgba(255,255,255,.035);box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);transition:left .12s ease,width .12s ease}
+
+/* ---------- rutinas ---------- */
+.vs-rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(430px,1fr));gap:2px 26px;margin-bottom:22px}
+.vs-rrow{display:grid;grid-template-columns:30px minmax(0,1fr) 74px 62px;align-items:center;gap:10px;padding:10px 10px;border-radius:9px;cursor:pointer;border:1px solid transparent;transition:background .15s,border-color .15s}
+.vs-rrow:hover{background:rgba(255,255,255,.035);border-color:var(--line)}
+.vs-rrow.off{opacity:.5}
+.vs-ri{display:grid;place-items:center}
+.vs-ri svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.vs-rm{min-width:0}
+.vs-rn{font-size:13.5px;font-weight:600;color:#f1ede6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vs-rw{display:flex;align-items:center;gap:10px;margin-top:4px}
+.vs-hr{font-family:var(--code);font-size:12px;color:#ffc7ad;padding:1px 6px;border-radius:5px;border:1px solid rgba(255,106,43,.35);background:rgba(255,106,43,.08)}
+.vs-days{display:flex;gap:7px}
+.vs-days i{font-style:normal;font-family:var(--brand);font-size:12px;font-weight:600;letter-spacing:.06em;color:#57534d}
+.vs-days i.on{color:#ffd2bd;opacity:1}
+.vs-sub{font-size:12.5px;color:var(--dim)}
+.vs-rv{text-align:right;line-height:1.15}
+.vs-rv b{display:block;font-family:var(--brand);font-weight:500;font-size:14px;color:#e9e4dc}
+.vs-rv span{font-size:12px;color:var(--dim)}
+.vs-week{border:1px solid var(--line);border-radius:12px;background:rgba(10,10,12,.6);padding:12px 14px 12px}
+.vs-wh{display:grid;grid-template-columns:60px repeat(7,1fr);padding-bottom:10px;border-bottom:1px solid var(--line)}
+.vs-wh span{font-family:var(--brand);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#cfc9c0;padding-left:8px}
+.vs-wh span b{font-weight:500;color:var(--dim);margin-left:4px;letter-spacing:.04em}
+.vs-wh span.hoy,.vs-wh span.hoy b{color:var(--accent)}
+.vs-wb{position:relative;display:grid;grid-template-columns:60px repeat(7,1fr);margin-top:6px}
+.vs-wl{position:absolute;inset:0;pointer-events:none}
+.vs-wl .hl{position:absolute;left:0;right:0;border-top:1px solid rgba(255,255,255,.045)}
+.vs-wl .hl span{position:absolute;left:0;top:-8px;font-family:var(--code);font-size:12px;color:#7a766f;background:var(--bg);padding-right:6px}
+.vs-wc{position:relative;border-left:1px solid rgba(255,255,255,.05)}
+.vs-wc.hoy{background:rgba(255,106,43,.035)}
+.vs-wc .now{position:absolute;left:0;right:0;height:1px;background:rgba(255,106,43,.55)}
+.vs-ev{position:absolute;left:6px;display:flex;align-items:center;gap:4px;max-width:calc(100% - 8px);z-index:1}
+.vs-evi{display:grid;place-items:center;flex:none;width:24px;height:24px;border-radius:50%;border:1px solid currentColor;cursor:pointer;font-style:normal}
+.vs-evi svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.vs-evi.ran{background:rgba(255,106,43,.16);box-shadow:0 0 10px rgba(255,106,43,.22)}
+.vs-evi.next{border-style:dashed;opacity:.85}
+.vs-evi.miss{color:var(--mute)!important}
+.vs-ev span{margin-left:3px;font-size:12px;color:#d5d0c8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;cursor:pointer}
+.vs-ev.dimt span{color:var(--dim)}
+.vs-ev:hover span{color:#fff}
+.vs-wk{display:flex;gap:18px;margin-top:10px;padding-left:60px;font-size:12px;color:var(--dim)}
+.vs-wk i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px;border:1px solid var(--g-rut)}
+.vs-wk i.ran{background:rgba(255,106,43,.35)}
+.vs-wk i.next{border-style:dashed}
+.vs-wk i.miss{border-color:var(--mute)}
+
+/* ---------- burbujas y lista (apps y skills) ---------- */
+.vs-split{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(380px,1fr);gap:28px;height:calc(100vh - 290px);min-height:420px}
+.vs-bubwrap{position:relative;min-height:0;height:100%}
+.vs-bub{display:block}
+.vs-bub .vs-b{cursor:pointer}
+.vs-bub .sh{fill:var(--gfill);stroke:currentColor;stroke-opacity:.55;stroke-width:1.2;transition:stroke-opacity .18s,fill-opacity .18s}
+.vs-bub .vs-b:hover .sh,.vs-bub .vs-b.hot .sh{stroke-opacity:1;stroke-width:1.6}
+.vs-bub .vs-b.dim .sh{fill:none;stroke:var(--mute);stroke-opacity:.7;stroke-dasharray:3 3}
+.vs-bub .vs-b.zero .sh{stroke-dasharray:none;stroke:currentColor;stroke-opacity:.28}
+.vs-bub .vs-b.zero.hot .sh,.vs-bub .vs-b.zero:hover .sh{stroke-opacity:.9}
+.vs-bub text{text-anchor:middle;pointer-events:none}
+.vs-bub .bn{font-family:var(--ui);font-size:12.5px;font-weight:600;fill:#efeae3}
+.vs-bub .bm{font-family:var(--brand);font-size:12px;font-weight:500;fill:var(--dim)}
+.vs-bub .vs-b.dim .bn{fill:var(--dim)}
+.vs-bub .bo{font-family:var(--ui);font-size:12px;font-weight:500;fill:var(--dim)}
+.vs-list{overflow:auto;min-height:0;padding-right:6px}
+.vs-row{display:grid;grid-template-columns:26px minmax(0,1fr);gap:6px;padding:9px 8px 10px;border-radius:9px;cursor:pointer;border:1px solid transparent;transition:background .15s,border-color .15s}
+.vs-row:hover,.vs-row.hot{background:rgba(255,255,255,.035);border-color:var(--line)}
+.vs-row.off .vs-rt b{color:#aaa59d}
+.vs-row.off .vs-ri,.vs-row.off .vs-meter{opacity:.45}
+.vs-row.off.hot .vs-rt b,.vs-row.off:hover .vs-rt b{color:#f1ede6}
+.vs-rb{min-width:0}
+.vs-rk{font-family:var(--brand);font-size:12px;color:#6f6b65;padding-top:3px;text-align:right;padding-right:4px}
+.vs-rt{display:flex;align-items:center;gap:8px;min-width:0}
+.vs-rt .vs-ri svg{width:16px;height:16px}
+.vs-rt b{font-size:13.5px;font-weight:600;color:#f1ede6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.vs-rt .pl{font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto;margin-left:-3px}
+.vs-rt em{margin-left:auto;font-style:normal;font-family:var(--brand);font-weight:600;font-size:13.5px;color:#fff;white-space:nowrap;padding-left:10px}
+.vs-rt .md{font-family:var(--brand);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.vs-rt .md-haiku{color:var(--teal)}.vs-rt .md-sonnet{color:var(--cyan)}.vs-rt .md-opus{color:var(--violet)}
+.vs-meter{height:3px;border-radius:3px;background:rgba(255,255,255,.07);margin:7px 0 6px;overflow:hidden}
+.vs-meter i{display:block;height:100%;border-radius:3px;opacity:.85;transform-origin:left}
+.vs-anim .vs-meter i{animation:vsGrow .7s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*18ms + 120ms)}
+@keyframes vsGrow{from{transform:scaleX(0)}to{transform:none}}
+.vs-rs{font-size:12px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vs-warn{display:flex;align-items:flex-start;gap:6px;margin-top:5px;font-size:12px;line-height:1.4;color:#e6c08f}
+.vs-warn svg{width:13px;height:13px;flex:none;margin-top:2px;stroke:currentColor;fill:none;stroke-width:1.9}
+.vs-shapes{display:flex;flex-wrap:wrap;gap:18px;margin-top:10px;font-size:12px;color:var(--dim)}
+.vs-shapes span{display:inline-flex;align-items:center;gap:7px}
+.vs-shapes svg .sh{fill:none;stroke:currentColor;stroke-width:1.4}
+.vs-mayo{margin-top:30px;max-width:1100px}
+.vs-mayo>.vs-k{margin-bottom:12px}
+.vs-runs{margin-top:26px;display:grid;grid-template-columns:1fr auto;align-items:start;gap:10px 18px;max-width:1100px}
+.vs-runs>.vs-k{grid-column:1/-1}
+.vs-runs .runs{min-width:0}
+
+/* ---------- ficha de skill ---------- */
+.vs-card{position:fixed;z-index:70;width:360px;padding:16px;border-radius:12px;border:1px solid var(--line2);background:rgba(12,12,15,.97);backdrop-filter:blur(14px);box-shadow:0 20px 60px rgba(0,0,0,.6);animation:vsIn .22s ease both}
+.vs-ch{display:flex;align-items:flex-start;gap:10px}
+.vs-ch>div{flex:1;min-width:0}
+.vs-ch b{display:block;font-family:var(--brand);font-weight:500;font-size:15px;color:#fff;word-break:break-word}
+.vs-ch span{font-size:12px;color:var(--dim)}
+.vs-ch b .org{font-family:var(--ui);font-size:13px;font-weight:500}
+.vs-ch .x{color:var(--dim);padding:2px}
+.vs-ch .x:hover{color:#fff}
+.vs-ch .x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8}
+.vs-card p{color:#cfc9c0;font-size:13px;line-height:1.5;margin:10px 0 12px}
+.vs-cs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.vs-cs div{border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.vs-cs b{display:block;font-family:var(--brand);font-weight:600;font-size:15px;color:#fff}
+.vs-cs span{font-size:12px;color:var(--dim)}
+.vs-cl{display:flex;gap:7px;align-items:flex-start;font-size:12.5px;color:var(--dim);margin-bottom:8px;line-height:1.45}
+.vs-cl svg{width:14px;height:14px;flex:none;margin-top:2px;stroke:currentColor;fill:none;stroke-width:1.8}
+.vs-cb{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.still .vs-card{animation:none}
+
+/* ---------- artifacts: misma barra que las demás vistas ---------- */
+.vs-q{width:300px}
+.vs-bar .search input{height:32px;font-size:13px}
+.vs-bar .search>svg{top:8px}
+.cards .empty-ill,.cards .rempty{grid-column:1/-1}
+/* el renglón de origen y fecha va abajo de la tarjeta: queda a la misma altura en toda la fila */
+.card.art .artb{flex:1 1 auto}
+.card.art .artb .meta{margin-top:auto;justify-content:space-between}
+/* lo mismo en tus espacios y en claude.ai: una tarjeta con su aviso; clic en el aviso abre la otra versión */
+.card.art .also{position:absolute;top:18px;right:18px;z-index:1;display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:12px;
+  font-size:12px;font-weight:500;color:#e9e4dc;background:rgba(6,6,7,.82);border:1px solid var(--line2);backdrop-filter:blur(6px);transition:border-color .15s,color .15s}
+.card.art .also svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8}
+.card.art .also:hover{border-color:rgba(255,255,255,.35);color:#fff}
+.vs-nores .illus{width:190px}
+
+/* ---------- piezas compartidas, ajustadas solo para Second Brain (esta hoja no la carga el inicio) ---------- */
+/* La ficha de un nodo flota debajo del encabezado: no tapa pestañas, buscador ni acomodos del mapa,
+   y deja ver las cifras de la esfera y los controles de zoom del mapa. */
+body.brain .drawer{top:166px;right:26px;bottom:100px;width:400px;border:1px solid var(--line2);border-radius:14px;overflow:hidden;
+  transform:translateX(calc(100% + 40px));box-shadow:0 24px 70px rgba(0,0,0,.55)}
+body.brain .drawer.open{transform:none}
+body.brain[data-view="map"] .drawer{bottom:72px}
+/* anillo de aplicaciones: el hexágono que chocaría con un panel se oculta */
+body.brain .hex{transition:transform .2s,opacity .2s}
+body.brain .hex.hid,body.brain .ringlabel.hid{opacity:0;pointer-events:none}
+/* buscar con /: el buscador pasa al centro, grande, y lo demás se apaga */
+body.brain.sfocus .top{z-index:46}
+body.brain.sfocus::after{content:"";position:fixed;inset:0;z-index:45;background:rgba(6,6,7,.62);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);animation:vsFade .18s ease both}
+body.brain.sfocus .top .left,body.brain.sfocus .top .tabs,body.brain.sfocus .top .vctl{opacity:.2;pointer-events:none}
+body.brain.sfocus #search{position:fixed;left:50%;top:24vh;transform:translateX(-50%);width:min(680px,calc(100vw - 52px));z-index:1}
+body.brain.sfocus #search input{height:58px;border-radius:14px;font-size:18px;padding:0 66px 0 54px;background:rgba(14,14,17,.97);
+  border-color:rgba(255,106,43,.55);box-shadow:0 0 0 4px rgba(255,106,43,.12),0 30px 90px rgba(0,0,0,.7)}
+body.brain.sfocus #search>svg{left:20px;top:20px;width:18px;height:18px}
+body.brain.sfocus #search .kbd{top:18px;right:18px;font-size:13px}
+body.brain.sfocus #search .results{top:66px;max-height:min(52vh,480px);border-radius:14px}
+body.brain.sfocus #search .results .r{padding:11px 16px}
+/* la vista recibe el foco para desplazarse con el teclado: sin marco */
+body.brain .view:focus{outline:none}
+/* diálogo para correr: si no cabe, se desplaza en vez de cortarse */
+body.brain .dbox{max-height:calc(100vh - 40px);overflow:auto}
+/* textos de apoyo con contraste suficiente */
+body.brain .legend .lgh{color:#8b877f}
+body.brain .tip .org{color:var(--dim);font-weight:400}
+/* Leyenda de esfera y mapa: la lista se desplaza dentro de la caja y un degradado avisa que hay más;
+   lo que no es dato (el relleno) queda fijo abajo y siempre a la vista. */
+body.brain .legend{max-height:calc(100vh - 176px);overflow:hidden;gap:0}
+body.brain .legend .lgscroll{display:flex;flex-direction:column;gap:2px;min-height:0;overflow:auto;overscroll-behavior:contain}
+body.brain .legend .lgscroll.fade-b{-webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(180deg,#000 calc(100% - 40px),transparent)}
+body.brain .legend .lgscroll.fade-t{-webkit-mask-image:linear-gradient(180deg,transparent,#000 30px);mask-image:linear-gradient(180deg,transparent,#000 30px)}
+body.brain .legend .lgscroll.fade-t.fade-b{-webkit-mask-image:linear-gradient(180deg,transparent,#000 30px,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(180deg,transparent,#000 30px,#000 calc(100% - 40px),transparent)}
+body.brain .legend .lgfill{flex:none;margin-top:6px;padding-top:6px;border-top:1px solid var(--line)}
+body.brain .legend .lgfill .lgh{margin-top:2px}
+/* Movimiento: solo en la esfera y en segundo plano (gris, sin naranja) */
+body.brain:not([data-view="orbs"]) .motion{display:none}
+body.brain .motion{gap:6px}
+body.brain #motionBtn{height:26px;padding:0 8px;gap:6px;border-color:transparent;background:none;color:var(--dim);font-size:12.5px;font-weight:500}
+body.brain #motionBtn:hover{color:#d5d0c8;border-color:var(--line2)}
+body.brain #motionBtn.on{color:#bdb8af}
+body.brain #motionBtn svg{width:14px;height:14px}
+body.brain .motion .slider{width:56px;background:rgba(255,255,255,.1)}
+body.brain .motion .slider i{background:rgba(236,232,225,.32)}
+body.brain .motion .slider b{top:-3px;width:9px;height:9px;background:#bdb8af}
+body.brain .rempty{color:var(--dim)}
+
+@media (max-width:1100px){.vs-split{grid-template-columns:1fr;height:auto}.vs-bubwrap{height:420px}}

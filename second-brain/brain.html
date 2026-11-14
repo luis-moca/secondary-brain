@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MOCA Second Brain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800&family=Red+Hat+Text:wght@400;500;600;700&family=Red+Hat+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css?v=22">
+<link rel="stylesheet" href="css/vistas.css?v=4">
+<script src="https://unpkg.com/lucide@0.453.0/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<script>document.write('<script src="js/data.js?t=' + Date.now() + '"><\/script>');</script>
+<script src="js/shared.js?v=25"></script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body class="brain">
+<div id="stage"></div>
+<canvas id="map"></canvas>
+<div id="labels"></div>
+<div class="hexring" id="hexring"></div>
+
+<header class="top">
+  <div class="left">
+    <div>
+      <div class="brand"><span id="logo"></span><div class="name"><b>MOCA</b><span>Second Brain</span></div></div>
+      <div class="brand"><div class="sub" id="viewname" style="margin-left:38px">Esfera 3D</div></div>
+    </div>
+    <div class="row">
+      <a class="btn" href="index.html" id="back"></a>
+      <button class="btn" id="menuBtn"></button>
+    </div>
+  </div>
+  <div class="right">
+    <div class="tabs">
+      <div class="motion"><button class="btn on" id="motionBtn" title="Velocidad de giro de la esfera"></button><div class="slider" id="slider"><i></i><b></b></div></div>
+      <div class="seg" id="tabs">
+        <button data-v="orbs" class="on">Esfera</button><button data-v="map">Mapa</button><button data-v="timeline">Tiempo</button>
+        <button data-v="routines">Rutinas</button><button data-v="skills">Skills</button><button data-v="apps">Apps</button><button data-v="artifacts">Artifacts</button>
+      </div>
+      <button class="iconbtn" id="reload" title="Actualizar desde tu Knowledge"></button>
+    </div>
+    <div class="search" id="search"></div>
+    <div class="vctl" id="vctl"></div>
+  </div>
+</header>
+
+<nav class="menu" id="menu"></nav>
+<div class="legend" id="legend"></div>
+<div class="stats" id="stats"></div>
+<div class="mapzoom" id="mapzoom"><button data-z="out" title="Alejar">−</button><button data-z="fit" title="Encuadrar todo">Fit</button><button data-z="in" title="Acercar">+</button></div>
+<div class="tip" id="tip"></div>
+
+<section class="view solid" id="v-timeline"></section>
+<section class="view solid" id="v-routines"></section>
+<section class="view solid" id="v-skills"></section>
+<section class="view solid" id="v-apps"></section>
+<section class="view solid" id="v-artifacts"></section>
+
+<script type="module" src="js/brain.js?v=27"></script>
+</body>
+</html>

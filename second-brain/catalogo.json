@@ -1,0 +1,436 @@
+{
+ "_nota": "Lo que el escáner no puede leer solo de disco. Edítalo a mano y vuelve a correr scan.py. Todo lo de aquí es de ejemplo: cámbialo por lo tuyo.",
+ "owner": {
+  "nombre": "Alex",
+  "rol": "Tu rol · Tu equipo",
+  "marca": "MOCA"
+ },
+ "pendientes_archivo": "Proyectos/ESTADO.md",
+ "rutinas": {
+  "_fuente": "Tus tareas programadas de Claude (las que crees con /schedule). Estas tres son de ejemplo.",
+  "items": [
+   {
+    "id": "resumen-semanal",
+    "nombre": "Resumen semanal",
+    "cron": "0 8 * * 1,5",
+    "dias": [
+     1,
+     5
+    ],
+    "hora": "08:00",
+    "activa": true,
+    "icono": "radar"
+   },
+   {
+    "id": "pendientes-al-dia",
+    "nombre": "Pendientes al día",
+    "cron": "0 19 * * 1-5",
+    "dias": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ],
+    "hora": "19:00",
+    "activa": true,
+    "icono": "file-clock"
+   },
+   {
+    "id": "recordatorio-ejemplo",
+    "nombre": "Recordatorio de ejemplo",
+    "unica": "2026-11-27T09:00",
+    "activa": false,
+    "icono": "bell"
+   }
+  ]
+ },
+ "skills": {
+  "_fuente": "Skills públicas de los plugins de Claude. Las tuyas de ~/.claude/skills se agregan solas.",
+  "items": [
+   {
+    "id": "productivity:start",
+    "grupo": "Productividad",
+    "desc": "Arranca el sistema de tareas y memoria",
+    "icono": "play"
+   },
+   {
+    "id": "productivity:task-management",
+    "grupo": "Productividad",
+    "desc": "Tareas en un TASKS.md compartido",
+    "icono": "list-checks"
+   },
+   {
+    "id": "productivity:memory-management",
+    "grupo": "Productividad",
+    "desc": "Memoria de dos niveles: siglas, apodos, contexto",
+    "icono": "brain"
+   },
+   {
+    "id": "productivity:update",
+    "grupo": "Productividad",
+    "desc": "Sincroniza tareas y refresca memoria",
+    "icono": "refresh-cw"
+   },
+   {
+    "id": "data:analyze",
+    "grupo": "Datos",
+    "desc": "Responde preguntas de datos, de un dato a un análisis",
+    "icono": "line-chart"
+   },
+   {
+    "id": "data:build-dashboard",
+    "grupo": "Datos",
+    "desc": "Dashboard HTML con KPIs, filtros y gráficas",
+    "icono": "layout-dashboard",
+    "run": false,
+    "nota": "Crea archivos: úsala en el chat de Claude"
+   },
+   {
+    "id": "data:create-viz",
+    "grupo": "Datos",
+    "desc": "Gráficas de calidad con Python",
+    "icono": "bar-chart-3",
+    "run": false,
+    "nota": "Crea archivos: úsala en el chat de Claude"
+   },
+   {
+    "id": "data:explore-data",
+    "grupo": "Datos",
+    "desc": "Perfila una tabla nueva y su calidad",
+    "icono": "search"
+   },
+   {
+    "id": "data:validate-data",
+    "grupo": "Datos",
+    "desc": "Revisa un análisis antes de compartirlo",
+    "icono": "shield-check"
+   },
+   {
+    "id": "data:statistical-analysis",
+    "grupo": "Datos",
+    "desc": "Tendencias, atípicos y pruebas estadísticas",
+    "icono": "sigma"
+   },
+   {
+    "id": "data:sql-queries",
+    "grupo": "Datos",
+    "desc": "SQL correcto en cualquier dialecto",
+    "icono": "database"
+   },
+   {
+    "id": "design:design-critique",
+    "grupo": "Diseño",
+    "desc": "Crítica de usabilidad y jerarquía",
+    "icono": "eye"
+   },
+   {
+    "id": "design:ux-copy",
+    "grupo": "Diseño",
+    "desc": "Textos de botones, errores y estados vacíos",
+    "icono": "type"
+   },
+   {
+    "id": "design:research-synthesis",
+    "grupo": "Diseño",
+    "desc": "Junta entrevistas en hallazgos y prioridades",
+    "icono": "layers"
+   },
+   {
+    "id": "design:user-research",
+    "grupo": "Diseño",
+    "desc": "Guías de entrevista, encuestas y pruebas",
+    "icono": "users"
+   },
+   {
+    "id": "anthropic-skills:deep-research",
+    "grupo": "Anthropic",
+    "desc": "Investigación con varias fuentes y reporte",
+    "icono": "telescope"
+   },
+   {
+    "id": "anthropic-skills:docs",
+    "grupo": "Anthropic",
+    "desc": "Documentos vivos para compartir y comentar",
+    "icono": "file-text",
+    "run": false,
+    "nota": "Crea archivos: úsala en el chat de Claude"
+   },
+   {
+    "id": "anthropic-skills:xlsx",
+    "grupo": "Anthropic",
+    "desc": "Crea y edita hojas de cálculo",
+    "icono": "sheet",
+    "run": false,
+    "nota": "Crea archivos: úsala en el chat de Claude"
+   },
+   {
+    "id": "anthropic-skills:pptx",
+    "grupo": "Anthropic",
+    "desc": "Presentaciones de PowerPoint",
+    "icono": "presentation",
+    "run": false,
+    "nota": "Crea archivos: úsala en el chat de Claude"
+   },
+   {
+    "id": "anthropic-skills:docx",
+    "grupo": "Anthropic",
+    "desc": "Documentos de Word",
+    "icono": "file-type",
+    "run": false,
+    "nota": "Crea archivos: úsala en el chat de Claude"
+   },
+   {
+    "id": "anthropic-skills:pdf",
+    "grupo": "Anthropic",
+    "desc": "Lee, une y crea PDFs",
+    "icono": "file",
+    "run": false,
+    "nota": "Crea archivos: úsala en el chat de Claude"
+   },
+   {
+    "id": "anthropic-skills:schedule",
+    "grupo": "Anthropic",
+    "desc": "Crea tareas que corren solas",
+    "icono": "alarm-clock",
+    "run": false,
+    "nota": "Necesita conversación: úsala en el chat"
+   },
+   {
+    "id": "anthropic-skills:morning",
+    "grupo": "Anthropic",
+    "desc": "Brief de la mañana",
+    "icono": "sunrise",
+    "run": false,
+    "nota": "Necesita conversación: úsala en el chat"
+   },
+   {
+    "id": "anthropic-skills:skill-creator",
+    "grupo": "Anthropic",
+    "desc": "Crea y mide skills nuevas",
+    "icono": "wand-2",
+    "run": false,
+    "nota": "Necesita conversación: úsala en el chat"
+   },
+   {
+    "id": "anthropic-skills:consolidate-memory",
+    "grupo": "Anthropic",
+    "desc": "Limpia y une memorias duplicadas",
+    "icono": "merge",
+    "run": false,
+    "nota": "Necesita conversación: úsala en el chat"
+   }
+  ]
+ },
+ "apps": {
+  "_fuente": "Conectores de ejemplo. Pon el estado real de los tuyos: conectado, falla, sin autorizar o fuera de Claude.",
+  "items": [
+   {
+    "nombre": "Tareas programadas",
+    "estado": "conectado",
+    "icono": "alarm-clock",
+    "mcp": [
+     "scheduled-tasks"
+    ]
+   },
+   {
+    "nombre": "Navegador de Claude",
+    "estado": "conectado",
+    "icono": "globe",
+    "mcp": [
+     "Claude_Browser"
+    ]
+   },
+   {
+    "nombre": "Chrome",
+    "estado": "conectado",
+    "icono": "chrome",
+    "mcp": [
+     "claude-in-chrome"
+    ]
+   },
+   {
+    "nombre": "Terminal",
+    "estado": "conectado",
+    "icono": "terminal",
+    "mcp": [
+     "terminal"
+    ]
+   },
+   {
+    "nombre": "Google Drive",
+    "estado": "sin autorizar",
+    "icono": "hard-drive"
+   },
+   {
+    "nombre": "Gmail",
+    "estado": "sin autorizar",
+    "icono": "mail"
+   },
+   {
+    "nombre": "Google Calendar",
+    "estado": "sin autorizar",
+    "icono": "calendar"
+   },
+   {
+    "nombre": "Slack",
+    "estado": "sin autorizar",
+    "icono": "slack"
+   },
+   {
+    "nombre": "Notion",
+    "estado": "sin autorizar",
+    "icono": "notebook"
+   },
+   {
+    "nombre": "Figma",
+    "estado": "sin autorizar",
+    "icono": "figma"
+   },
+   {
+    "nombre": "Tu CRM",
+    "estado": "fuera de Claude",
+    "nota": "Ejemplo: una herramienta que usas sin conector",
+    "icono": "cloud"
+   }
+  ]
+ },
+ "agenda": {
+  "_fuente": "Citas fijas que quieras ver en el calendario. Las de tu ESTADO.md salen solas.",
+  "items": []
+ },
+ "microapps_externas": {
+  "_fuente": "Accesos a páginas HTML de tu compu. Cada item: nombre, desc, ruta absoluta, icono.",
+  "items": []
+ },
+ "artifacts_claude": {
+  "_fuente": "Tus artifacts publicados en claude.ai. Cada item: titulo, url, fecha (AAAA-MM-DD).",
+  "items": []
+ },
+ "pendientes": {
+  "_fuente": "Lo que falta para que MOCA funcione como mayordomo: todo conectado y automatizado, tú solo apruebas.",
+  "items": [
+   {
+    "area": "Base",
+    "titulo": "Servidor local con acciones reales",
+    "estado": "hecho",
+    "quien": "Claude",
+    "desbloquea": "Abrir archivos, reescanear y correr skills desde el panel",
+    "detecta": "server"
+   },
+   {
+    "area": "Base",
+    "titulo": "Node y FFmpeg en tu carpeta personal",
+    "estado": "pendiente",
+    "quien": "Alex",
+    "como": "Pon node y ffmpeg en ~/.local/node/bin",
+    "desbloquea": "Miniaturas de video y herramientas extra",
+    "detecta": "node_ffmpeg"
+   },
+   {
+    "area": "Base",
+    "titulo": "Iniciar sesión de Claude fuera de la app (una vez)",
+    "estado": "pendiente",
+    "quien": "Alex",
+    "como": "En Terminal: arrastra second-brain/bin/claude a la ventana, Enter, escribe /login",
+    "desbloquea": "Correr skills y preguntas desde el panel",
+    "detecta": "claude_login"
+   },
+   {
+    "area": "Base",
+    "titulo": "Node permanente en tu Terminal",
+    "estado": "pendiente",
+    "quien": "Alex",
+    "como": "Agrega a ~/.zshrc: export PATH=\"$HOME/.local/node/bin:$PATH\"",
+    "desbloquea": "Que cualquier sesión de Claude use Node",
+    "detecta": "zshrc"
+   },
+   {
+    "area": "Conexiones",
+    "titulo": "Correo",
+    "estado": "pendiente",
+    "quien": "Alex",
+    "como": "En claude.ai, Configuración, Conectores: conecta tu correo",
+    "desbloquea": "Panel de correo y resumen diario"
+   },
+   {
+    "area": "Conexiones",
+    "titulo": "Calendario",
+    "estado": "pendiente",
+    "quien": "Alex",
+    "como": "Conecta Google Calendar en claude.ai",
+    "desbloquea": "Calendario real y recordatorios"
+   },
+   {
+    "area": "Conexiones",
+    "titulo": "Slack",
+    "estado": "por decidir",
+    "quien": "Alex",
+    "como": "Escribe /mcp en Claude Code y autoriza Slack",
+    "desbloquea": "Avisos y aprobaciones donde ya trabajas"
+   },
+   {
+    "area": "Rutinas",
+    "titulo": "Resumen diario de correo",
+    "estado": "bloqueado",
+    "quien": "Claude",
+    "como": "Depende de conectar tu correo",
+    "desbloquea": "Lo que necesita respuesta, cada mañana"
+   },
+   {
+    "area": "Rutinas",
+    "titulo": "Rutina silenciosa de vencimientos",
+    "estado": "listo para crear",
+    "quien": "Claude",
+    "como": "Revisa ESTADO.md a diario y solo avisa si algo vence en 48 h",
+    "desbloquea": "Que nada se te pase sin llenarte de avisos"
+   },
+   {
+    "area": "Panel",
+    "titulo": "Acceso desde el celular",
+    "estado": "por decidir",
+    "quien": "Alex",
+    "como": "Red privada hacia tu compu; no lo subas a internet con datos privados",
+    "desbloquea": "Ver y aprobar sin estar en la compu"
+   }
+  ]
+ },
+ "skills_notas": {
+  "hyperframes:reverse-any-video": {
+   "run": false,
+   "nota": "Requiere HyperFrames Pro: manda tu contenido a HeyGen"
+  },
+  "hyperframes:style-sampling": {
+   "run": false,
+   "nota": "Requiere HyperFrames Pro: manda tu contenido a HeyGen"
+  },
+  "hyperframes:hyperframes": {
+   "run": false,
+   "nota": "Crea archivos y renderiza: úsala en el chat de Claude"
+  },
+  "hyperframes:hyperframes-cli": {
+   "run": false,
+   "nota": "Ejecuta comandos: úsala en el chat de Claude"
+  },
+  "hyperframes:slideshow": {
+   "run": false,
+   "nota": "Crea archivos: úsala en el chat de Claude"
+  },
+  "hyperframes:figma": {
+   "run": false,
+   "nota": "Necesita Figma conectado"
+  },
+  "hyperframes:media-use": {
+   "run": false,
+   "nota": "Crea archivos: úsala en el chat de Claude"
+  },
+  "hyperframes:hyperframes-registry": {
+   "run": false,
+   "nota": "Instala bloques: úsala en el chat de Claude"
+  },
+  "hyperframes:remotion-to-hyperframes": {
+   "run": false,
+   "nota": "Convierte proyectos: úsala en el chat de Claude"
+  }
+ }
+}
