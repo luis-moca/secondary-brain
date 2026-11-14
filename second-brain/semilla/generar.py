@@ -196,7 +196,9 @@ class Semilla:
         path.write_text("\n".join(out), "utf-8")
 
     def fechar(self, path):
-        dias = int(330 * self.r.random() ** 1.8)
+        # lo que sale en la bandeja (páginas y entregables) es reciente, como en un Knowledge que se usa; lo demás, de todo el año
+        reciente = path.suffix == ".html" or "/entregables/" in path.as_posix()
+        dias = int((40 if reciente else 330) * self.r.random() ** 1.8)
         t = time.time() - dias * 86400 - self.r.randint(0, 86000)
         os.utime(path, (t, t))
 
