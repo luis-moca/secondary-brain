@@ -4,4 +4,4 @@ Your files as a living 3D second brain, with Claude's routines, skills and to-do
 
 [![Secondary Brain](cover.jpg)](https://luis-moca.github.io/secondary-brain/)
 
-Video: https://luis-moca.github.io/secondary-brain/video.mp4
+Video: https://luis-moca.github.io/secondary-brain/overview

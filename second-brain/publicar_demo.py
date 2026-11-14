@@ -60,6 +60,13 @@ SHIM = r"""// Solo en la demo en línea: contesta lo que en tu compu contesta se
 """ % REPO
 
 
+OVERVIEW = """<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Secondary Brain · Overview</title><style>html,body{margin:0;height:100%;background:#000}
+video{width:100%;height:100%;object-fit:contain;display:block}</style></head><body>
+<video src="overview.mp4" autoplay muted playsinline controls preload="auto"></video></body></html>
+"""
+
+
 def correr(cmd, cwd, env):
     r = subprocess.run(cmd, cwd=cwd, env=env, capture_output=True, text=True, timeout=1800)
     if r.returncode:
@@ -172,9 +179,11 @@ def armar(salida):
         for x in SITIO:
             src = sitio / x
             (shutil.copytree if src.is_dir() else shutil.copy2)(src, salida / x)
-        video = PANEL.parent / "media" / "demo.mp4"   # el video del producto: un clic y se reproduce en el navegador
+        video = PANEL.parent / "media" / "demo.mp4"   # el video del producto en /overview: un clic y se reproduce
         if video.exists():
-            shutil.copy2(video, salida / "video.mp4")
+            (salida / "overview").mkdir()
+            shutil.copy2(video, salida / "overview" / "overview.mp4")
+            (salida / "overview" / "index.html").write_text(OVERVIEW, "utf-8")
         (salida / ".nojekyll").write_text("", "utf-8")
         (salida / MARCA).write_text(datetime.now().isoformat(), "utf-8")
     n = sum(1 for _ in salida.rglob("*") if _.is_file())
